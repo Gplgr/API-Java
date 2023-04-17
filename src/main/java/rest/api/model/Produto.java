@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Produto {
-    protected int id;
+    protected Long id;
     protected String produto;
     protected Double valor;
     protected Integer quantidade;
@@ -21,7 +21,7 @@ public class Produto {
         this.quantidade = quantidade;
     }
 
-    public Produto(int id, String produto, Double valor, Integer quantidade) {
+    public Produto(Long id, String produto, Double valor, Integer quantidade) {
         super();
         this.id = id;
         this.produto = produto;
@@ -31,10 +31,10 @@ public class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getProduto() {

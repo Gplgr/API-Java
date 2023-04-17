@@ -26,29 +26,32 @@ public class Controller {
     
     //GET para um elemento especíico
     @GetMapping("/produto/{id}")
-    public Produto getNoteById(@PathVariable(value = "id") Long id) {
-    	return produtoRepository.findById(id).orElseThrow();	
+    public Produto getProdutoById(@PathVariable(value = "id") Integer id) {
+    	Long idlong = Long.valueOf(id);
+    	return produtoRepository.findById(idlong).orElseThrow();	
     }
 
     //POST de um elemento
     @PostMapping("/criar")
-    public Produto createNote(@Valid @RequestBody Produto produto) {
+    public Produto createProduto(@Valid @RequestBody Produto produto) {
         return produtoRepository.save(produto);
     }
     
     // PUT para alterar um elemento
     @PutMapping("/produto/{id}")
-    public Produto updateNote(@PathVariable(value = "id") Long id, @Valid @RequestBody Produto atualizado) {
-    		Produto produto = produtoRepository.findById(id).orElseThrow();
-    		produto.setValor(atualizado.getValor());
-    		produto.setQuantidade(atualizado.getQuantidade());
-    		Produto prodAtualizado = produtoRepository.save(produto);
-   			return prodAtualizado;
+    public Produto updateProduto(@PathVariable(value = "id") Integer id, @Valid @RequestBody Produto atualizado) {
+    	Long idlong = Long.valueOf(id);
+    	Produto produto = produtoRepository.findById(idlong).orElseThrow();
+    	produto.setValor(atualizado.getValor());
+    	produto.setQuantidade(atualizado.getQuantidade());
+    	Produto prodAtualizado = produtoRepository.save(produto);
+   		return prodAtualizado;
     }
     // DELETE de um produto
     @DeleteMapping("/produto/{id}")
-    public ResponseEntity<?> deleteNote(@PathVariable(value = "id") Long id) {
-        Produto produto = produtoRepository.findById(id).orElseThrow();
+    public ResponseEntity<?> deleteProduto(@PathVariable(value = "id") Integer id) {
+    	Long idlong = Long.valueOf(id);
+        Produto produto = produtoRepository.findById(idlong).orElseThrow();
 
         produtoRepository.delete(produto);
 
